@@ -2,13 +2,13 @@
 
 ## Overview
 
-An in-class code-together activity deepening students' understanding of singly linked lists through Farr's Ice Cream's pre-order queue. The simpler operations (destructor, push_front, push_back, pop_front, print) are already implemented — students focus on the three algorithmically interesting methods: `pop_back` using the trailing pointer pattern, and `contains` / `remove` using search traversal.
+An in-class code-together activity deepening students' understanding of singly linked lists through Farr's Ice Cream's pre-order queue. The simpler operations (destructor, push_front, push_back, pop_front, pop_back, print) are already implemented — students focus on `contains` and `remove`, both of which apply the same trailing pointer pattern seen in `pop_back`.
 
 ## Files
 
 | File | Focus | TODOs |
 |---|---|---|
-| `SinglyLinkedList.cpp` | `pop_back` (trailing pointer), `contains`, `remove` | ~16 |
+| `SinglyLinkedList.cpp` | `contains`, `remove` | ~9 |
 | `main.cpp` | Pre-order queue: last cancellation (Part 1) + lookup and bulk cancellation (Part 2) | 7 |
 
 ## Supporting Files
@@ -20,32 +20,30 @@ An in-class code-together activity deepening students' understanding of singly l
 
 ## Teaching Order
 
-Work through `SinglyLinkedList.cpp` in the order the operations appear in `main.cpp`:
+Start by walking through the given `pop_back` implementation — students don't write it, but reading it establishes the trailing pointer pattern they'll apply in `remove`.
 
-### Part 1 — pop_back
+### Part 1 — Review: `pop_back` (given)
 
-#### 1. `pop_back` -- Last Order Cancelled
-- Review the already-implemented methods briefly (destructor, push_front, push_back, pop_front)
+Walk through the already-implemented `pop_back` as a class:
 - Single-node special case: head IS the tail; just delete and reset
-- The **trailing pointer pattern**: `previous` trails one step behind `current`
+- The **trailing pointer pattern**: `previous` starts at `head_`, `current` starts at `head_->next`
 - Loop condition: stop when `current->next` is nullptr (current is the last node)
 - Why one pointer isn't enough: singly-linked nodes have no backward reference
-- O(n) cost — must traverse to find the second-to-last node every time
-- Preview: doubly linked lists fix this with `prev_` and `tail_` — CT9
+- O(n) cost — must walk the whole list; preview that CT9 fixes this with `tail_`
 
-### Part 2 — Search and Remove
+### Part 2 — Student TODOs
 
-#### 2. `contains` -- Order Lookup
-- Read-only traversal: same pattern as `print()`, but return true on match
+#### 1. `contains` -- Order Lookup
+- Read-only traversal: same `current` pointer pattern as `print()`, but return true on match
 - Why `const` matters: the compiler enforces the no-modification promise
 - O(n) worst case; no shortcut for an unsorted list
 
-#### 3. `remove` -- Order Cancellation
+#### 2. `remove` -- Order Cancellation
+- Connect to `pop_back`: same trailing pointer setup, but stop on a data match instead of the end
 - Three cases and why each needs different treatment:
   - Empty list: nothing to do
   - Head match: no previous node exists — delegate to `pop_front()`
-  - Middle/tail match: trailing pointer is identical to `pop_back`, but stops on a data match
-- Pointer surgery: `previous->next = current->next`, then `delete current`
+  - Middle/tail match: `previous->next = current->next`, then `delete current`
 - Show all three cases in sequence (tail → middle → head) using the main.cpp scenario
 
 ## Key Concepts
