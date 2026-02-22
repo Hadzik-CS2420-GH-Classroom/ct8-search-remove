@@ -15,7 +15,7 @@
 
 SinglyLinkedList::~SinglyLinkedList() {
     while (head_) {
-        Node* temp = head_;
+        auto* temp = head_;
         head_      = head_->next;
         delete temp;
     }
@@ -30,12 +30,12 @@ void SinglyLinkedList::push_front(int value) {
 }
 
 void SinglyLinkedList::push_back(int value) {
-    Node* node = new Node{value};
+    auto* node = new Node{value};
 
     if (!head_) {
         head_ = node;
     } else {
-        Node* current = head_;
+        auto* current = head_;
         while (current->next) {
             current = current->next;
         }
@@ -53,7 +53,7 @@ void SinglyLinkedList::pop_front() {
     }
 
     // Temp-pointer pattern: save, advance, delete.
-    Node* temp = head_;
+    auto* temp = head_;
     head_      = head_->next;
     delete temp;
     --size_;
@@ -62,9 +62,9 @@ void SinglyLinkedList::pop_front() {
 // --- Utility ---
 
 void SinglyLinkedList::print() const {
-    Node* current = head_;
+    auto* current = head_;
     while (current) {
-        std::cout << current->data << " -> ";
+        std::cout << std::format("{} -> ", current->data);
         current = current->next;
     }
     std::cout << "nullptr\n";
@@ -74,7 +74,7 @@ int  SinglyLinkedList::get_size()  const noexcept { return size_; }
 bool SinglyLinkedList::is_empty()  const noexcept { return size_ == 0; }
 
 // =============================================================================
-// TODO sections — implement the three methods below.
+// Solutions
 // =============================================================================
 
 // --- pop_back ---
@@ -107,34 +107,32 @@ void SinglyLinkedList::pop_back() {
     //   If head_->next is nullptr there is no second-to-last node.
     //   We skip the trailing pointer entirely: just delete head_ and reset.
     if (!head_->next) {
-        // TODO: Delete head_ and set it to nullptr, then decrement size_
-
+        delete head_;
+        head_ = nullptr;
+        --size_;
         return;
     }
 
     // ! DISCUSSION: Set up the trailing pointer pair.
     //   Both start near the front of the list, then advance together
     //   until 'current' reaches the last node.
-
-    // TODO: Create 'previous' pointing to head_, and 'current' pointing to head_->next
+    auto* previous = head_;
+    auto* current  = head_->next;
 
     // ! DISCUSSION: Advance until current has no successor (it IS the last node).
     //   Each iteration: step previous up to current, then step current forward.
     //   After the loop: current == last node, previous == second-to-last.
-
-    // TODO: While current->next is not nullptr:
-    //         Advance previous to current
-    //         Advance current to current->next
+    while (current->next) {
+        previous = current;
+        current  = current->next;
+    }
 
     // ! DISCUSSION: Unlink and delete the last node.
     //   previous->next = nullptr  — previous is now the new tail
     //   delete current            — free the old tail's memory
-
-    // TODO: Set previous->next to nullptr
-
-    // TODO: Delete current
-
-    // TODO: Decrement size_
+    previous->next = nullptr;
+    delete current;
+    --size_;
 }
 
 // --- contains ---
@@ -155,16 +153,12 @@ void SinglyLinkedList::pop_back() {
 bool SinglyLinkedList::contains(int value) const {
     // ! DISCUSSION: One pointer is enough here — we're only reading.
     //   No trailing pointer needed because we never modify next_ pointers.
-
-    // TODO: Create a 'current' pointer starting at head_
-
-    // TODO: While current is not nullptr:
-    //         If current->data equals value, return true.
-    //         Advance current to current->next.
-
-    // TODO: Return false — reached nullptr without finding value
-
-    return false; // placeholder — remove this line when done
+    auto* current = head_;
+    while (current) {
+        if (current->data == value) return true;
+        current = current->next;
+    }
+    return false;
 }
 
 // --- remove ---
@@ -192,24 +186,24 @@ void SinglyLinkedList::remove(int value) {
     //   The trailing pointer pattern requires a 'previous' node, but there
     //   is no node before head_. Instead, delegate to pop_front().
     if (head_->data == value) {
-        // TODO: Call pop_front() to remove the head node
-
+        pop_front();
         return;
     }
 
     // ! DISCUSSION: Set up the trailing pointer pair.
     //   We already know head_ is not the match, so 'previous' starts at
     //   head_ and 'current' starts one step ahead at head_->next.
+    auto* previous = head_;
+    auto* current  = head_->next;
 
-    // TODO: Create 'previous' pointing to head_, and 'current' pointing to head_->next
-
-    // TODO: While current is not nullptr:
-    //         If current->data == value:
-    //           Set previous->next = current->next   (bypass current)
-    //           Delete current
-    //           Decrement size_
-    //           Return
-    //         Otherwise:
-    //           Advance previous to current
-    //           Advance current to current->next
+    while (current) {
+        if (current->data == value) {
+            previous->next = current->next;
+            delete current;
+            --size_;
+            return;
+        }
+        previous = current;
+        current  = current->next;
+    }
 }
