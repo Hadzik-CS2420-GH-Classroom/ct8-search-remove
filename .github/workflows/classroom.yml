@@ -1,0 +1,227 @@
+name: Autograding Tests
+on:
+  - push
+  - repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Build Project
+      continue-on-error: true
+      run: |
+        cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+        cmake --build build --config Release
+
+    - name: Build Check (2 points)
+      id: build
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Build Check (2 points)
+        setup-command: ''
+        command: |
+          if [ -f build/run_tests ]; then
+            echo "Build successful"
+          else
+            echo "Build failed" && exit 1
+          fi
+        timeout: 10
+        max-score: 2
+
+    # ==================== pop_back Tests (10 points) ====================
+
+    - name: Pop Back Removes Tail (4 points)
+      id: pop-back-tail
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Pop Back Removes Tail (4 points)
+        setup-command: ''
+        command: |
+          if [ -f build/run_tests ]; then
+            cd build && ./run_tests --gtest_filter=SinglyLinkedListTest.PopBackRemovesTail
+          else
+            exit 1
+          fi
+        timeout: 10
+        max-score: 4
+
+    - name: Pop Back To Empty (4 points)
+      id: pop-back-empty
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Pop Back To Empty (4 points)
+        setup-command: ''
+        command: |
+          if [ -f build/run_tests ]; then
+            cd build && ./run_tests --gtest_filter=SinglyLinkedListTest.PopBackToEmpty
+          else
+            exit 1
+          fi
+        timeout: 10
+        max-score: 4
+
+    - name: Pop Back Single Node (2 points)
+      id: pop-back-single
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Pop Back Single Node (2 points)
+        setup-command: ''
+        command: |
+          if [ -f build/run_tests ]; then
+            cd build && ./run_tests --gtest_filter=SinglyLinkedListTest.PopBackSingleNode
+          else
+            exit 1
+          fi
+        timeout: 10
+        max-score: 2
+
+    # ==================== contains() Tests (9 points) ====================
+
+    - name: Contains True For Head Middle Tail (3 points)
+      id: contains-true
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Contains True For Head Middle Tail (3 points)
+        setup-command: ''
+        command: |
+          if [ -f build/run_tests ]; then
+            cd build && ./run_tests --gtest_filter=SinglyLinkedListTest.ContainsTrueForHeadMiddleTail
+          else
+            exit 1
+          fi
+        timeout: 10
+        max-score: 3
+
+    - name: Contains False For Missing Value (3 points)
+      id: contains-false
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Contains False For Missing Value (3 points)
+        setup-command: ''
+        command: |
+          if [ -f build/run_tests ]; then
+            cd build && ./run_tests --gtest_filter=SinglyLinkedListTest.ContainsFalseForMissingValue
+          else
+            exit 1
+          fi
+        timeout: 10
+        max-score: 3
+
+    - name: Contains On Empty List (3 points)
+      id: contains-empty
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Contains On Empty List (3 points)
+        setup-command: ''
+        command: |
+          if [ -f build/run_tests ]; then
+            cd build && ./run_tests --gtest_filter=SinglyLinkedListTest.ContainsOnEmptyList
+          else
+            exit 1
+          fi
+        timeout: 10
+        max-score: 3
+
+    # ==================== remove() Tests (9 points) ====================
+
+    - name: Remove Tail (2 points)
+      id: remove-tail
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Remove Tail (2 points)
+        setup-command: ''
+        command: |
+          if [ -f build/run_tests ]; then
+            cd build && ./run_tests --gtest_filter=SinglyLinkedListTest.RemoveTail
+          else
+            exit 1
+          fi
+        timeout: 10
+        max-score: 2
+
+    - name: Remove Middle (2 points)
+      id: remove-middle
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Remove Middle (2 points)
+        setup-command: ''
+        command: |
+          if [ -f build/run_tests ]; then
+            cd build && ./run_tests --gtest_filter=SinglyLinkedListTest.RemoveMiddle
+          else
+            exit 1
+          fi
+        timeout: 10
+        max-score: 2
+
+    - name: Remove Head (2 points)
+      id: remove-head
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Remove Head (2 points)
+        setup-command: ''
+        command: |
+          if [ -f build/run_tests ]; then
+            cd build && ./run_tests --gtest_filter=SinglyLinkedListTest.RemoveHead
+          else
+            exit 1
+          fi
+        timeout: 10
+        max-score: 2
+
+    - name: Remove Not Found (2 points)
+      id: remove-not-found
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Remove Not Found (2 points)
+        setup-command: ''
+        command: |
+          if [ -f build/run_tests ]; then
+            cd build && ./run_tests --gtest_filter=SinglyLinkedListTest.RemoveNotFound
+          else
+            exit 1
+          fi
+        timeout: 10
+        max-score: 2
+
+    - name: Remove On Empty List (1 point)
+      id: remove-empty
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Remove On Empty List (1 point)
+        setup-command: ''
+        command: |
+          if [ -f build/run_tests ]; then
+            cd build && ./run_tests --gtest_filter=SinglyLinkedListTest.RemoveOnEmptyList
+          else
+            exit 1
+          fi
+        timeout: 10
+        max-score: 1
+
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        BUILD_RESULTS:            "${{steps.build.outputs.result}}"
+        POP-BACK-TAIL_RESULTS:    "${{steps.pop-back-tail.outputs.result}}"
+        POP-BACK-EMPTY_RESULTS:   "${{steps.pop-back-empty.outputs.result}}"
+        POP-BACK-SINGLE_RESULTS:  "${{steps.pop-back-single.outputs.result}}"
+        CONTAINS-TRUE_RESULTS:    "${{steps.contains-true.outputs.result}}"
+        CONTAINS-FALSE_RESULTS:   "${{steps.contains-false.outputs.result}}"
+        CONTAINS-EMPTY_RESULTS:   "${{steps.contains-empty.outputs.result}}"
+        REMOVE-TAIL_RESULTS:      "${{steps.remove-tail.outputs.result}}"
+        REMOVE-MIDDLE_RESULTS:    "${{steps.remove-middle.outputs.result}}"
+        REMOVE-HEAD_RESULTS:      "${{steps.remove-head.outputs.result}}"
+        REMOVE-NOT-FOUND_RESULTS: "${{steps.remove-not-found.outputs.result}}"
+        REMOVE-EMPTY_RESULTS:     "${{steps.remove-empty.outputs.result}}"
+      with:
+        runners: build,pop-back-tail,pop-back-empty,pop-back-single,contains-true,contains-false,contains-empty,remove-tail,remove-middle,remove-head,remove-not-found,remove-empty
