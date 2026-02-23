@@ -59,8 +59,6 @@ void SinglyLinkedList::pop_front() {
     --size_;
 }
 
-// ? SEE DIAGRAM: images/svgs/pop_back.svg
-
 void SinglyLinkedList::pop_back() {
     if (!head_) {
         throw std::underflow_error("Cannot pop from an empty list");
