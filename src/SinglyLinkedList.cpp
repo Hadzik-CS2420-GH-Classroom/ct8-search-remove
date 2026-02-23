@@ -130,7 +130,7 @@ bool SinglyLinkedList::is_empty()  const noexcept { return size_ == 0; }
 
 bool SinglyLinkedList::contains(int value) const {
     // ! DISCUSSION: One pointer is enough here — we're only reading.
-    //   No trailing pointer needed because we never modify next_ pointers.
+    //   No trailing pointer needed because we never modify next pointers.
 
     // TODO: Create a 'current' pointer starting at head_
 

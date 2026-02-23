@@ -83,15 +83,15 @@ int main() {
     // and every case is visible in the output.
 
     std::cout << "remove(2004) — tail:   ";
-    // TODO: Call remove(2004), then print the list
+    // TODO: Call remove(2004)
     orders.print();
 
     std::cout << "remove(2002) — middle: ";
-    // TODO: Call remove(2002), then print the list
+    // TODO: Call remove(2002)
     orders.print();
 
     std::cout << "remove(2001) — head:   ";
-    // TODO: Call remove(2001), then print the list
+    // TODO: Call remove(2001)
     orders.print();
 
     std::cout << std::format("Orders remaining: {}\n", orders.get_size());
