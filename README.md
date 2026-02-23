@@ -55,11 +55,12 @@ Walk through the already-implemented `pop_back` as a class:
 
 ## Diagrams
 
-SVG sources are in `images/svgs/`, PNG exports in `images/`.
+PNGs are in `images/`. SVG sources are in `images/svgs/` (for editing).
 
 | Diagram | Referenced In | Shows |
 |---|---|---|
-| `pop_back` | `SinglyLinkedList.cpp` | Trailing pointer: previous/current traversal, unlink and delete last node |
+| `contains` | `SinglyLinkedList.cpp` | Single pointer walking head→nullptr; highlights match (true) and nullptr (false) |
+| `remove` | `SinglyLinkedList.cpp` | Trailing pointer bypass: previous→next redirected to skip the deleted node (middle/tail case) |
 
 ## Comment Conventions
 

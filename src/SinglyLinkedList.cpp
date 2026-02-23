@@ -115,6 +115,8 @@ bool SinglyLinkedList::is_empty()  const noexcept { return size_ == 0; }
 
 // --- contains ---
 
+// ? SEE DIAGRAM: images/contains.png — single pointer traversal; returns true on match, false at nullptr
+
 // ! DISCUSSION: contains() is a read-only search — it traverses without modifying.
 //   Walk from head_ to nullptr. If any node's data matches, return true immediately.
 //   If we reach nullptr without a match, return false.
@@ -144,6 +146,8 @@ bool SinglyLinkedList::contains(int value) const {
 }
 
 // --- remove ---
+
+// ? SEE DIAGRAM: images/remove.png — trailing pointer bypass: previous->next skips over the deleted node (middle/tail case)
 
 // ! DISCUSSION: remove() deletes the FIRST node whose data matches value.
 //   If the value isn't in the list, do nothing (no error).
