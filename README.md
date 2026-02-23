@@ -4,12 +4,20 @@
 
 An in-class code-together activity deepening students' understanding of singly linked lists through Farr's Ice Cream's pre-order queue. The simpler operations (destructor, push_front, push_back, pop_front, pop_back, print) are already implemented — students focus on `contains` and `remove`, both of which apply the same trailing pointer pattern seen in `pop_back`.
 
+## Learning Objectives
+
+- Use the **trailing pointer pattern** (`previous`/`current`) to locate and unlink a node by value
+- Implement **contains** as a read-only traversal with a single pointer
+- Implement **remove** with three distinct cases: empty list, head match, and middle/tail match
+- Explain why `contains()` is marked **const** and what the compiler enforces
+- Recognize that `contains` and `remove` are both **O(n)** on an unsorted singly linked list
+
 ## Files
 
 | File | Focus | TODOs |
 |---|---|---|
-| `SinglyLinkedList.cpp` | `contains`, `remove` | ~9 |
-| `main.cpp` | Pre-order queue: last cancellation (Part 1) + lookup and bulk cancellation (Part 2) | 7 |
+| `SinglyLinkedList.cpp` | `contains`, `remove` | 6 |
+| `main.cpp` | Pre-order queue: last cancellation (Part 1) + lookup and bulk cancellation (Part 2) | 6 |
 
 ## Supporting Files
 
@@ -22,29 +30,17 @@ An in-class code-together activity deepening students' understanding of singly l
 
 Start by walking through the given `pop_back` implementation — students don't write it, but reading it establishes the trailing pointer pattern they'll apply in `remove`.
 
-### Part 1 — Review: `pop_back` (given)
+### 1. `SinglyLinkedList.cpp` — contains and remove
 
-Walk through the already-implemented `pop_back` as a class:
-- Single-node special case: head IS the tail; just delete and reset
-- The **trailing pointer pattern**: `previous` starts at `head_`, `current` starts at `head_->next`
-- Loop condition: stop when `current->next` is nullptr (current is the last node)
-- Why one pointer isn't enough: singly-linked nodes have no backward reference
-- O(n) cost — must walk the whole list; preview that CT9 fixes this with `tail_`
+1. **contains — Order Lookup** — read-only traversal with single pointer; return true on match, false at nullptr; `const` qualifier enforced by compiler
+2. **remove — Head case** — no previous node exists so delegate to `pop_front()`; avoids duplicating temp-pointer logic
+3. **remove — Middle/tail case** — trailing pointer setup (same as `pop_back`); stop on data match instead of end; `previous->next = current->next` then delete
 
-### Part 2 — Student TODOs
+### 2. `main.cpp` — Pre-order Queue Scenario
 
-#### 1. `contains` -- Order Lookup
-- Read-only traversal: same `current` pointer pattern as `print()`, but return true on match
-- Why `const` matters: the compiler enforces the no-modification promise
-- O(n) worst case; no shortcut for an unsorted list
-
-#### 2. `remove` -- Order Cancellation
-- Connect to `pop_back`: same trailing pointer setup, but stop on a data match instead of the end
-- Three cases and why each needs different treatment:
-  - Empty list: nothing to do
-  - Head match: no previous node exists — delegate to `pop_front()`
-  - Middle/tail match: `previous->next = current->next`, then `delete current`
-- Show all three cases in sequence (tail → middle → head) using the main.cpp scenario
+1. **Part 1 — pop_back** — last customer cancels; review the O(n) trailing pointer traversal from the given code
+2. **Part 2 — contains** — look up order IDs; demonstrates read-only O(n) search with no shortcut for unsorted data
+3. **Part 2 — remove** — cancel orders at tail, middle, then head to show all three cases in sequence
 
 ## Key Concepts
 
@@ -61,6 +57,15 @@ PNGs are in `images/`. SVG sources are in `images/svgs/` (for editing).
 |---|---|---|
 | `contains` | `SinglyLinkedList.cpp` | Single pointer walking head→nullptr; highlights match (true) and nullptr (false) |
 | `remove` | `SinglyLinkedList.cpp` | Trailing pointer bypass: previous→next redirected to skip the deleted node (middle/tail case) |
+
+## Grading (30 points)
+
+| Category | Points | What is tested |
+|---|---|---|
+| Build | 2 | Project compiles without errors |
+| `pop_back` | 10 | Removes tail correctly, handles single-node and pop to empty |
+| `contains` | 9 | Finds head/middle/tail values, returns false for missing and empty list |
+| `remove` | 9 | Removes head, middle, tail; no-op for missing value and empty list |
 
 ## Comment Conventions
 
