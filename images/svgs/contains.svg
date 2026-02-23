@@ -33,14 +33,14 @@
   <text x="20" y="78" class="step-label">Step 1: initialize — current starts at head_</text>
   <text x="20" y="95" class="code">auto* current = head_;</text>
 
-  <!-- head_ above node 2001 -->
+  <!-- head_ above node 2004 -->
   <text x="55" y="115" text-anchor="middle" class="pointer-label">head_</text>
   <line x1="55" y1="120" x2="55" y2="140" stroke="#8e44ad" stroke-width="2" marker-end="url(#ptr-arrow)"/>
 
-  <!-- Node 2001 -->
+  <!-- Node 2004 -->
   <rect x="20"  y="142" width="70" height="40" rx="4" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
   <rect x="90"  y="142" width="50" height="40" rx="4" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
-  <text x="55"  y="167" text-anchor="middle" class="value">2001</text>
+  <text x="55"  y="167" text-anchor="middle" class="value">2004</text>
   <text x="115" y="167" text-anchor="middle" class="value-sm">next</text>
   <line x1="140" y1="162" x2="178" y2="162" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
 
@@ -58,10 +58,10 @@
   <text x="435" y="167" text-anchor="middle" class="value-sm">next</text>
   <line x1="460" y1="162" x2="498" y2="162" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
 
-  <!-- Node 2004 -->
+  <!-- Node 2001 -->
   <rect x="500" y="142" width="70" height="40" rx="4" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
   <rect x="570" y="142" width="50" height="40" rx="4" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
-  <text x="535" y="167" text-anchor="middle" class="value">2004</text>
+  <text x="535" y="167" text-anchor="middle" class="value">2001</text>
   <text x="595" y="167" text-anchor="middle" class="value-sm">next</text>
   <line x1="620" y1="162" x2="658" y2="162" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
 
@@ -69,7 +69,7 @@
   <rect x="660" y="151" width="68" height="22" rx="4" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1.5"/>
   <text x="694" y="167" text-anchor="middle" class="missed">nullptr</text>
 
-  <!-- current pointer below node 2001 -->
+  <!-- current pointer below node 2004 -->
   <text x="55" y="205" text-anchor="middle" class="pointer-label">current</text>
   <line x1="55" y1="193" x2="55" y2="189" stroke="#8e44ad" stroke-width="2"/>
   <polygon points="51 189, 55 182, 59 189" fill="#8e44ad"/>
@@ -78,10 +78,10 @@
   <text x="20" y="238" class="step-label">Step 2: inspect node — not a match, advance current</text>
   <text x="20" y="255" class="code">if (current-&gt;data == value) return true;   current = current-&gt;next;</text>
 
-  <!-- Node 2001 -->
+  <!-- Node 2004 -->
   <rect x="20"  y="272" width="70" height="40" rx="4" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
   <rect x="90"  y="272" width="50" height="40" rx="4" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
-  <text x="55"  y="297" text-anchor="middle" class="value">2001</text>
+  <text x="55"  y="297" text-anchor="middle" class="value">2004</text>
   <text x="115" y="297" text-anchor="middle" class="value-sm">next</text>
   <line x1="140" y1="292" x2="178" y2="292" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
 
@@ -99,10 +99,10 @@
   <text x="435" y="297" text-anchor="middle" class="value-sm">next</text>
   <line x1="460" y1="292" x2="498" y2="292" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
 
-  <!-- Node 2004 -->
+  <!-- Node 2001 -->
   <rect x="500" y="272" width="70" height="40" rx="4" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
   <rect x="570" y="272" width="50" height="40" rx="4" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
-  <text x="535" y="297" text-anchor="middle" class="value">2004</text>
+  <text x="535" y="297" text-anchor="middle" class="value">2001</text>
   <text x="595" y="297" text-anchor="middle" class="value-sm">next</text>
   <line x1="620" y1="292" x2="658" y2="292" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
 
@@ -110,22 +110,22 @@
   <rect x="660" y="281" width="68" height="22" rx="4" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1.5"/>
   <text x="694" y="297" text-anchor="middle" class="missed">nullptr</text>
 
-  <!-- current pointer below node 2002 -->
+  <!-- current pointer below node 2002 (advanced past 2004) -->
   <text x="215" y="335" text-anchor="middle" class="pointer-label">current</text>
   <line x1="215" y1="323" x2="215" y2="319" stroke="#8e44ad" stroke-width="2"/>
   <polygon points="211 319, 215 312, 219 319" fill="#8e44ad"/>
 
-  <!-- Step 2 note — explicit comparison -->
-  <text x="400" y="362" text-anchor="middle" class="note">2001 ≠ 2003 (value) — loop continues, advancing current one step each iteration</text>
+  <!-- Step 2 note — explicit comparison showing unsorted traversal -->
+  <text x="400" y="362" text-anchor="middle" class="note">2004 ≠ 2003 (value) — loop continues, advancing current one step each iteration</text>
 
   <!-- ==================== Outcome A — FOUND ==================== -->
   <text x="20" y="392" class="step-label">Outcome A: contains(2003) — match found — return true</text>
   <text x="20" y="409" class="code">if (current-&gt;data == value) return true;</text>
 
-  <!-- Node 2001 -->
+  <!-- Node 2004 -->
   <rect x="20"  y="426" width="70" height="40" rx="4" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
   <rect x="90"  y="426" width="50" height="40" rx="4" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
-  <text x="55"  y="451" text-anchor="middle" class="value">2001</text>
+  <text x="55"  y="451" text-anchor="middle" class="value">2004</text>
   <text x="115" y="451" text-anchor="middle" class="value-sm">next</text>
   <line x1="140" y1="446" x2="178" y2="446" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
 
@@ -143,10 +143,10 @@
   <text x="435" y="451" text-anchor="middle" class="value-sm">next</text>
   <line x1="460" y1="446" x2="498" y2="446" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
 
-  <!-- Node 2004 -->
+  <!-- Node 2001 -->
   <rect x="500" y="426" width="70" height="40" rx="4" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
   <rect x="570" y="426" width="50" height="40" rx="4" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
-  <text x="535" y="451" text-anchor="middle" class="value">2004</text>
+  <text x="535" y="451" text-anchor="middle" class="value">2001</text>
   <text x="595" y="451" text-anchor="middle" class="value-sm">next</text>
   <line x1="620" y1="446" x2="658" y2="446" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
 
@@ -165,10 +165,10 @@
   <text x="20" y="547" class="step-label">Outcome B: contains(9999) — not in list — return false</text>
   <text x="20" y="564" class="code">// loop exits when current reaches nullptr — value was never found</text>
 
-  <!-- Node 2001 -->
+  <!-- Node 2004 -->
   <rect x="20"  y="581" width="70" height="40" rx="4" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
   <rect x="90"  y="581" width="50" height="40" rx="4" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
-  <text x="55"  y="606" text-anchor="middle" class="value">2001</text>
+  <text x="55"  y="606" text-anchor="middle" class="value">2004</text>
   <text x="115" y="606" text-anchor="middle" class="value-sm">next</text>
   <line x1="140" y1="601" x2="178" y2="601" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
 
@@ -186,10 +186,10 @@
   <text x="435" y="606" text-anchor="middle" class="value-sm">next</text>
   <line x1="460" y1="601" x2="498" y2="601" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
 
-  <!-- Node 2004 -->
+  <!-- Node 2001 -->
   <rect x="500" y="581" width="70" height="40" rx="4" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
   <rect x="570" y="581" width="50" height="40" rx="4" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
-  <text x="535" y="606" text-anchor="middle" class="value">2004</text>
+  <text x="535" y="606" text-anchor="middle" class="value">2001</text>
   <text x="595" y="606" text-anchor="middle" class="value-sm">next</text>
   <line x1="620" y1="601" x2="658" y2="601" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
 
