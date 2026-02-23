@@ -59,6 +59,42 @@ void SinglyLinkedList::pop_front() {
     --size_;
 }
 
+void SinglyLinkedList::pop_back() {
+    if (!head_) {
+        throw std::underflow_error("Cannot pop from an empty list");
+    }
+
+    // ! DISCUSSION: Single-node case — head IS the tail.
+    //   If head_->next is nullptr there is no second-to-last node.
+    //   We skip the trailing pointer entirely: just delete head_ and reset.
+    if (!head_->next) {
+        delete head_;
+        head_ = nullptr;
+        --size_;
+        return;
+    }
+
+    // ! DISCUSSION: The trailing pointer pattern.
+    //   'previous' starts at head_, 'current' starts one step ahead.
+    //   When the loop ends, current is at the last node and previous
+    //   is at the second-to-last — the node whose next we set to nullptr.
+    //
+    // ! DISCUSSION: pop_back is O(n) — we must walk the whole list to find
+    //   the second-to-last node. pop_front is O(1). This asymmetry is a
+    //   key weakness of singly linked lists. A doubly linked list (CT9)
+    //   fixes it with a tail_ pointer.
+    auto* previous = head_;
+    auto* current  = head_->next;
+    while (current->next) {
+        previous = current;
+        current  = current->next;
+    }
+
+    previous->next = nullptr;
+    delete current;
+    --size_;
+}
+
 // --- Utility ---
 
 void SinglyLinkedList::print() const {
@@ -77,65 +113,9 @@ bool SinglyLinkedList::is_empty()  const noexcept { return size_ == 0; }
 // Solutions
 // =============================================================================
 
-// --- pop_back ---
-
-// ! DISCUSSION: pop_back must FIND the last node before it can delete it.
-//   Singly-linked nodes only know their SUCCESSOR (node->next), so once we
-//   reach the last node we have no way to go back to the one before it.
-//
-//   The trailing pointer pattern solves this with two pointers:
-//     'previous' — one step behind 'current' at all times
-//     'current'  — advances to the last node
-//   When the loop ends, 'current' is the last node and 'previous' is the
-//   second-to-last — the one whose next_ we need to set to nullptr.
-//
-// ! DISCUSSION: pop_back is O(n). Every call walks the entire list just to
-//   remove one node. Compare this to pop_front which is O(1) — it just
-//   moves the head pointer. This asymmetry is a fundamental weakness of
-//   singly linked lists.
-//   Doubly linked lists fix it with a prev pointer — O(1) pop_back
-//   using a tail_ member. We'll build that in CT9.
-//
-// ? SEE DIAGRAM: images/svgs/pop_back.svg
-
-void SinglyLinkedList::pop_back() {
-    if (!head_) {
-        throw std::underflow_error("Cannot pop from an empty list");
-    }
-
-    // ! DISCUSSION: Single-node case — head IS the tail.
-    //   If head_->next is nullptr there is no second-to-last node.
-    //   We skip the trailing pointer entirely: just delete head_ and reset.
-    if (!head_->next) {
-        delete head_;
-        head_ = nullptr;
-        --size_;
-        return;
-    }
-
-    // ! DISCUSSION: Set up the trailing pointer pair.
-    //   Both start near the front of the list, then advance together
-    //   until 'current' reaches the last node.
-    auto* previous = head_;
-    auto* current  = head_->next;
-
-    // ! DISCUSSION: Advance until current has no successor (it IS the last node).
-    //   Each iteration: step previous up to current, then step current forward.
-    //   After the loop: current == last node, previous == second-to-last.
-    while (current->next) {
-        previous = current;
-        current  = current->next;
-    }
-
-    // ! DISCUSSION: Unlink and delete the last node.
-    //   previous->next = nullptr  — previous is now the new tail
-    //   delete current            — free the old tail's memory
-    previous->next = nullptr;
-    delete current;
-    --size_;
-}
-
 // --- contains ---
+
+// ? SEE DIAGRAM: images/contains.png — single pointer traversal; returns true on match, false at nullptr
 
 // ! DISCUSSION: contains() is a read-only search — it traverses without modifying.
 //   Walk from head_ to nullptr. If any node's data matches, return true immediately.
@@ -152,7 +132,7 @@ void SinglyLinkedList::pop_back() {
 
 bool SinglyLinkedList::contains(int value) const {
     // ! DISCUSSION: One pointer is enough here — we're only reading.
-    //   No trailing pointer needed because we never modify next_ pointers.
+    //   No trailing pointer needed because we never modify next pointers.
     auto* current = head_;
     while (current) {
         if (current->data == value) return true;
@@ -162,6 +142,8 @@ bool SinglyLinkedList::contains(int value) const {
 }
 
 // --- remove ---
+
+// ? SEE DIAGRAM: images/remove.png — trailing pointer bypass: previous->next skips over the deleted node (middle/tail case)
 
 // ! DISCUSSION: remove() deletes the FIRST node whose data matches value.
 //   If the value isn't in the list, do nothing (no error).
