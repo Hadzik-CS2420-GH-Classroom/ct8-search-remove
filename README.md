@@ -8,8 +8,8 @@ An in-class code-together activity deepening students' understanding of singly l
 
 | File | Focus | TODOs |
 |---|---|---|
-| `SinglyLinkedList.cpp` | `contains`, `remove` | ~9 |
-| `main.cpp` | Pre-order queue: last cancellation (Part 1) + lookup and bulk cancellation (Part 2) | 7 |
+| `SinglyLinkedList.cpp` | `contains`, `remove` | 6 |
+| `main.cpp` | Pre-order queue: last cancellation (Part 1) + lookup and bulk cancellation (Part 2) | 6 |
 
 ## Supporting Files
 
