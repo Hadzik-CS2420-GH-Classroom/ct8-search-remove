@@ -8,10 +8,10 @@ int main() {
 
     // ! DISCUSSION: Farr's Ice Cream now accepts pre-orders by order ID.
     //   Customers submit their order ahead of time and join a queue.
-    //   The manager needs three operations that CT7 left as stubs:
-    //     pop_back  — the last customer in line cancels
-    //     contains  — check whether an order ID is still in the queue
-    //     remove    — cancel a specific order from anywhere in the queue
+    //   The manager needs three operations:
+    //   - pop_back  — the last customer in line cancels
+    //   - contains  — check whether an order ID is still in the queue
+    //   - remove    — cancel a specific order from anywhere in the queue
 
     // =========================================================================
     // PART 1 — pop_back: last order cancelled
@@ -43,10 +43,10 @@ int main() {
     orders.print();
     std::cout << std::format("Orders pending: {}\n\n", orders.get_size());
 
-    // ! DISCUSSION: pop_back has to walk the ENTIRE list to find the
-    //   second-to-last node before it can remove the last one.
-    //   That's O(n) — one full traversal per call.
-    //   A doubly linked list (CT9) solves this with a tail_ pointer: O(1).
+    // ! DISCUSSION: pop_back has to walk the ENTIRE list.
+    //   - Traverses to the second-to-last node before it can remove the last one
+    //   - That's O(n) — one full traversal per call
+    //   - A doubly linked list (CT9) solves this with a tail_ pointer: O(1)
 
     // =========================================================================
     // PART 2 — contains() and remove(): lookup and cancellation
@@ -67,17 +67,17 @@ int main() {
     std::cout << "\n";
 
     // ! DISCUSSION: contains() is read-only — it only traverses, never modifies.
-    //   Order 2003 is third in the list — found after inspecting 3 nodes.
-    //   Order 9999 doesn't exist — the loop reaches nullptr before finding it.
-    //   Both are O(n) worst case. No shortcuts for an unsorted list.
+    //   - Order 2003 is third in the list — found after inspecting 3 nodes
+    //   - Order 9999 doesn't exist — the loop reaches nullptr before finding it
+    //   - Both are O(n) worst case — no shortcuts for an unsorted list
 
     // --- 4. Processing cancellations ---
     std::cout << "--- Processing cancellations ---\n";
 
     // ! DISCUSSION: remove() has three cases based on WHERE the match is:
-    //   tail match   — trailing pointer reaches the end, unlinks the last node
-    //   middle match — trailing pointer stops mid-list, bypasses the node
-    //   head match   — no 'previous' node exists; delegates to pop_front()
+    //   - tail match   — trailing pointer reaches the end, unlinks the last node
+    //   - middle match — trailing pointer stops mid-list, bypasses the node
+    //   - head match   — no 'previous' node exists; delegates to pop_front()
     //
     // Work through each case in this order so the list state stays clean
     // and every case is visible in the output.
