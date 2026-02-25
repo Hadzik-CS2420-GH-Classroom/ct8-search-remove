@@ -65,8 +65,8 @@ void SinglyLinkedList::pop_back() {
     }
 
     // ! DISCUSSION: Single-node case — head IS the tail.
-    //   If head_->next is nullptr there is no second-to-last node.
-    //   We skip the trailing pointer entirely: just delete head_ and reset.
+    //   - If head_->next is nullptr there is no second-to-last node
+    //   - We skip the trailing pointer entirely: just delete head_ and reset
     if (!head_->next) {
         delete head_;
         head_ = nullptr;
@@ -75,14 +75,14 @@ void SinglyLinkedList::pop_back() {
     }
 
     // ! DISCUSSION: The trailing pointer pattern.
-    //   'previous' starts at head_, 'current' starts one step ahead.
-    //   When the loop ends, current is at the last node and previous
-    //   is at the second-to-last — the node whose next we set to nullptr.
+    //   - 'previous' starts at head_, 'current' starts one step ahead
+    //   - When the loop ends, current is at the last node and previous
+    //     is at the second-to-last — the node whose next we set to nullptr
     //
-    // ! DISCUSSION: pop_back is O(n) — we must walk the whole list to find
-    //   the second-to-last node. pop_front is O(1). This asymmetry is a
-    //   key weakness of singly linked lists. A doubly linked list (CT9)
-    //   fixes it with a tail_ pointer.
+    // ! DISCUSSION: pop_back is O(n).
+    //   - We must walk the whole list to find the second-to-last node
+    //   - pop_front is O(1) — this asymmetry is a key weakness of singly linked lists
+    //   - A doubly linked list (CT9) fixes it with a tail_ pointer
     auto* previous = head_;
     auto* current  = head_->next;
     while (current->next) {
@@ -118,21 +118,23 @@ bool SinglyLinkedList::is_empty()  const noexcept { return size_ == 0; }
 // ? SEE DIAGRAM: images/contains.png — single pointer traversal; returns true on match, false at nullptr
 
 // ! DISCUSSION: contains() is a read-only search — it traverses without modifying.
-//   Walk from head_ to nullptr. If any node's data matches, return true immediately.
-//   If we reach nullptr without a match, return false.
+//   - Walk from head_ to nullptr
+//   - If any node's data matches, return true immediately
+//   - If we reach nullptr without a match, return false
 //
-// ! DISCUSSION: O(n) in the worst case. For an unsorted list there's no shortcut —
-//   every node might need to be inspected. If the list were sorted we could
-//   stop early (value < current means it can't be further right), but we're
-//   not maintaining sorted order here.
+// ! DISCUSSION: O(n) in the worst case.
+//   - For an unsorted list there's no shortcut — every node might need to be inspected
+//   - If the list were sorted we could stop early (value < current means it can't
+//     be further right), but we're not maintaining sorted order here
 //
-// ! DISCUSSION: Notice the 'const' qualifier. contains() promises not to
-//   modify the list. The compiler enforces this — only const methods may be
-//   called on a const object or through a const reference.
+// ! DISCUSSION: Notice the 'const' qualifier.
+//   - contains() promises not to modify the list
+//   - The compiler enforces this — only const methods may be called
+//     on a const object or through a const reference
 
 bool SinglyLinkedList::contains(int value) const {
     // ! DISCUSSION: One pointer is enough here — we're only reading.
-    //   No trailing pointer needed because we never modify next pointers.
+    //   - No trailing pointer needed because we never modify next pointers
     auto* current = head_;
     while (current) {
         if (current->data == value) return true;
@@ -146,17 +148,17 @@ bool SinglyLinkedList::contains(int value) const {
 // ? SEE DIAGRAM: images/remove.png — trailing pointer bypass: previous->next skips over the deleted node (middle/tail case)
 
 // ! DISCUSSION: remove() deletes the FIRST node whose data matches value.
-//   If the value isn't in the list, do nothing (no error).
+//   - If the value isn't in the list, do nothing (no error)
 //
 // ! DISCUSSION: Three cases, each needing different treatment:
-//   1. Empty list        — nothing to do; guard at the top handles this.
-//   2. Head node matches — there is no 'previous' node to update.
-//                          Delegate to pop_front(); it handles memory and size_.
-//   3. Middle/tail match — trailing pointer to locate and unlink the node.
+//   - Empty list — nothing to do; guard at the top handles this
+//   - Head node matches — there is no 'previous' node to update;
+//     delegate to pop_front() which handles memory and size_
+//   - Middle/tail match — trailing pointer to locate and unlink the node
 //
-// ! DISCUSSION: The trailing pointer logic is identical to pop_back, except
-//   instead of advancing unconditionally to the end, we stop when we FIND
-//   a match. The pointer surgery is the same:
+// ! DISCUSSION: The trailing pointer logic here is the same pattern as pop_back.
+//   - Instead of advancing unconditionally to the end, we stop when we FIND a match
+//   - The pointer surgery is the same:
 //     previous->next = current->next   (skip over current)
 //     delete current                   (free the memory)
 //     --size_
@@ -165,16 +167,17 @@ void SinglyLinkedList::remove(int value) {
     if (!head_) return;
 
     // ! DISCUSSION: Special case — the head node is the match.
-    //   The trailing pointer pattern requires a 'previous' node, but there
-    //   is no node before head_. Instead, delegate to pop_front().
+    //   - The trailing pointer pattern requires a 'previous' node, but there
+    //     is no node before head_
+    //   - Instead, delegate to pop_front()
     if (head_->data == value) {
         pop_front();
         return;
     }
 
     // ! DISCUSSION: Set up the trailing pointer pair.
-    //   We already know head_ is not the match, so 'previous' starts at
-    //   head_ and 'current' starts one step ahead at head_->next.
+    //   - We already know head_ is not the match
+    //   - 'previous' starts at head_, 'current' starts one step ahead at head_->next
     auto* previous = head_;
     auto* current  = head_->next;
 
