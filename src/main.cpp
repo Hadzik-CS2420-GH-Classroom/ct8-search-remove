@@ -1,6 +1,5 @@
 #include "SinglyLinkedList.h"
 
-#include <format>
 #include <iostream>
 
 int main() {
@@ -31,17 +30,17 @@ int main() {
 
     std::cout << "Order queue:    ";
     orders.print();
-    std::cout << std::format("Orders pending: {}\n\n", orders.get_size());
+    std::cout << "Orders pending: " << orders.get_size() << "\n\n";
 
     // --- 2. Last customer changes their mind ---
     std::cout << "--- Last order cancelled ---\n";
     std::cout << "Order 2005 called in — they got impatient and left the queue.\n";
 
-    orders.pop_back();
+    // TODO: Call pop_back() to remove the last order
 
     std::cout << "Order queue:    ";
     orders.print();
-    std::cout << std::format("Orders pending: {}\n\n", orders.get_size());
+    std::cout << "Orders pending: " << orders.get_size() << "\n\n";
 
     // ! DISCUSSION: pop_back has to walk the ENTIRE list.
     //   - Traverses to the second-to-last node before it can remove the last one
@@ -57,10 +56,12 @@ int main() {
     // --- 3. Checking order status ---
     std::cout << "--- Looking up orders ---\n";
 
-    std::cout << std::format("Order 2003 in queue: {}\n",
-        orders.contains(2003) ? "true" : "false");
-    std::cout << std::format("Order 9999 in queue: {}\n",
-        orders.contains(9999) ? "true" : "false");
+    // TODO: Use contains() to check if order 2003 is still in the queue.
+    //       Print "Order 2003 in queue: true" or "Order 2003 in queue: false".
+    //       (Hint: use std::boolalpha or a ternary to produce "true"/"false")
+
+    // TODO: Use contains() to check if order 9999 is in the queue.
+    //       Print "Order 9999 in queue: true" or "Order 9999 in queue: false".
 
     std::cout << "\n";
 
@@ -81,18 +82,18 @@ int main() {
     // and every case is visible in the output.
 
     std::cout << "remove(2004) — tail:   ";
-    orders.remove(2004);
+    // TODO: Call remove(2004)
     orders.print();
 
     std::cout << "remove(2002) — middle: ";
-    orders.remove(2002);
+    // TODO: Call remove(2002)
     orders.print();
 
     std::cout << "remove(2001) — head:   ";
-    orders.remove(2001);
+    // TODO: Call remove(2001)
     orders.print();
 
-    std::cout << std::format("Orders remaining: {}\n", orders.get_size());
+    std::cout << "Orders remaining: " << orders.get_size() << "\n";
 
     return 0;
 }
