@@ -1,6 +1,5 @@
 #include "SinglyLinkedList.h"
 
-#include <format>
 #include <iostream>
 #include <stdexcept>
 
@@ -100,7 +99,7 @@ void SinglyLinkedList::pop_back() {
 void SinglyLinkedList::print() const {
     auto* current = head_;
     while (current) {
-        std::cout << std::format("{} -> ", current->data);
+        std::cout << current->data << " -> ";
         current = current->next;
     }
     std::cout << "nullptr\n";
@@ -110,7 +109,7 @@ int  SinglyLinkedList::get_size()  const noexcept { return size_; }
 bool SinglyLinkedList::is_empty()  const noexcept { return size_ == 0; }
 
 // =============================================================================
-// Solutions
+// TODO sections — implement the two methods below.
 // =============================================================================
 
 // --- contains ---
@@ -135,12 +134,16 @@ bool SinglyLinkedList::is_empty()  const noexcept { return size_ == 0; }
 bool SinglyLinkedList::contains(int value) const {
     // ! DISCUSSION: One pointer is enough here — we're only reading.
     //   - No trailing pointer needed because we never modify next pointers
-    auto* current = head_;
-    while (current) {
-        if (current->data == value) return true;
-        current = current->next;
-    }
-    return false;
+
+    // TODO: Create a 'current' pointer starting at head_
+
+    // TODO: While current is not nullptr:
+    //         If current->data equals value, return true.
+    //         Advance current to current->next.
+
+    // TODO: Return false — reached nullptr without finding value
+
+    return false; // placeholder — remove this line when done
 }
 
 // --- remove ---
@@ -171,24 +174,24 @@ void SinglyLinkedList::remove(int value) {
     //     is no node before head_
     //   - Instead, delegate to pop_front()
     if (head_->data == value) {
-        pop_front();
+        // TODO: Call pop_front() to remove the head node
+
         return;
     }
 
     // ! DISCUSSION: Set up the trailing pointer pair.
     //   - We already know head_ is not the match
     //   - 'previous' starts at head_, 'current' starts one step ahead at head_->next
-    auto* previous = head_;
-    auto* current  = head_->next;
 
-    while (current) {
-        if (current->data == value) {
-            previous->next = current->next;
-            delete current;
-            --size_;
-            return;
-        }
-        previous = current;
-        current  = current->next;
-    }
+    // TODO: Create 'previous' pointing to head_, and 'current' pointing to head_->next
+
+    // TODO: While current is not nullptr:
+    //         If current->data == value:
+    //           Set previous->next = current->next   (bypass current)
+    //           Delete current
+    //           Decrement size_
+    //           Return
+    //         Otherwise:
+    //           Advance previous to current
+    //           Advance current to current->next
 }
