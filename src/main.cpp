@@ -1,6 +1,5 @@
 #include "SinglyLinkedList.h"
 
-#include <format>
 #include <iostream>
 
 int main() {
@@ -31,7 +30,7 @@ int main() {
 
     std::cout << "Order queue:    ";
     orders.print();
-    std::cout << std::format("Orders pending: {}\n\n", orders.get_size());
+    std::cout << "Orders pending: " << orders.get_size() << "\n\n";
 
     // --- 2. Last customer changes their mind ---
     std::cout << "--- Last order cancelled ---\n";
@@ -41,7 +40,7 @@ int main() {
 
     std::cout << "Order queue:    ";
     orders.print();
-    std::cout << std::format("Orders pending: {}\n\n", orders.get_size());
+    std::cout << "Orders pending: " << orders.get_size() << "\n\n";
 
     // ! DISCUSSION: pop_back has to walk the ENTIRE list.
     //   - Traverses to the second-to-last node before it can remove the last one
@@ -94,7 +93,7 @@ int main() {
     // TODO: Call remove(2001)
     orders.print();
 
-    std::cout << std::format("Orders remaining: {}\n", orders.get_size());
+    std::cout << "Orders remaining: " << orders.get_size() << "\n";
 
     return 0;
 }
