@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 215">
+  <style>
+    text { font-family: 'Segoe UI', Arial, sans-serif; }
+    .title  { font-size: 18px; font-weight: bold; fill: #1a1a1a; }
+    .step-label { font-size: 14px; font-weight: bold; fill: #333; }
+    .value  { font-size: 15px; font-weight: bold; fill: #fff; }
+    .pointer-label { font-size: 12px; font-weight: bold; fill: #8e44ad; }
+    .found  { font-size: 12px; font-weight: bold; fill: #27ae60; }
+    .missed { font-size: 12px; font-weight: bold; fill: #e74c3c; }
+    .code   { font-size: 12px; fill: #2c3e50; font-family: 'Consolas', monospace; }
+    .note   { font-size: 11px; fill: #777; font-style: italic; }
+    .value-sm { font-size: 11px; font-weight: bold; fill: #fff; }
+    .target-label { font-size: 13px; font-family: 'Consolas', monospace; fill: #7d5a00; font-weight: bold; }
+  </style>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e74c3c"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="20" text-anchor="middle" class="title">remove: Head Match &#x2014; Delegate to pop_front()</text>
+
+  <!-- Target badge -->
+  <rect x="210" y="28" width="380" height="26" rx="13" fill="#fff8e1" stroke="#f39c12" stroke-width="1.5"/>
+  <text x="400" y="46" text-anchor="middle" class="target-label">removing:  data == 2004  (value = 2004)</text>
+
+  <!-- Step label -->
+  <text x="20" y="78" class="step-label">Check head first: head_-&gt;data == value &#x2014; delegate to pop_front()</text>
+
+  <!-- LEFT: full if block code -->
+  <text x="20" y="110" class="code">if (head_-&gt;data == value) {</text>
+  <text x="20" y="125" class="code">&#xA0;&#xA0;&#xA0;&#xA0;pop_front();</text>
+  <text x="20" y="140" class="code">&#xA0;&#xA0;&#xA0;&#xA0;return;</text>
+  <text x="20" y="155" class="code">}</text>
+
+  <!-- RIGHT: head_ above first node -->
+  <text x="297" y="95" text-anchor="middle" class="pointer-label">head_</text>
+  <line x1="297" y1="100" x2="297" y2="103" stroke="#8e44ad" stroke-width="2"/>
+  <polygon points="293 103, 297 110, 301 103" fill="#8e44ad"/>
+
+  <!-- Node 2004 — MATCH (yellow highlight) -->
+  <rect x="270" y="110" width="55" height="40" rx="4" fill="#f1c40f" stroke="#d4ac0d" stroke-width="3"/>
+  <rect x="325" y="110" width="38" height="40" rx="4" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
+  <text x="297" y="135" text-anchor="middle" class="value">2004</text>
+  <text x="344" y="135" text-anchor="middle" class="value-sm">next</text>
+  <line x1="363" y1="130" x2="385" y2="130" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Node 2002 -->
+  <rect x="387" y="110" width="55" height="40" rx="4" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+  <rect x="442" y="110" width="38" height="40" rx="4" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
+  <text x="414" y="135" text-anchor="middle" class="value">2002</text>
+  <text x="461" y="135" text-anchor="middle" class="value-sm">next</text>
+  <line x1="480" y1="130" x2="502" y2="130" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Node 2003 -->
+  <rect x="504" y="110" width="55" height="40" rx="4" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+  <rect x="559" y="110" width="38" height="40" rx="4" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
+  <text x="531" y="135" text-anchor="middle" class="value">2003</text>
+  <text x="578" y="135" text-anchor="middle" class="value-sm">next</text>
+  <line x1="597" y1="130" x2="619" y2="130" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Node 2001 -->
+  <rect x="621" y="110" width="55" height="40" rx="4" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+  <rect x="676" y="110" width="38" height="40" rx="4" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
+  <text x="648" y="135" text-anchor="middle" class="value">2001</text>
+  <text x="695" y="135" text-anchor="middle" class="value-sm">next</text>
+  <line x1="714" y1="130" x2="736" y2="130" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- nullptr -->
+  <rect x="738" y="119" width="52" height="22" rx="4" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1.5"/>
+  <text x="764" y="135" text-anchor="middle" class="missed">nullptr</text>
+
+  <!-- Notes -->
+  <text x="420" y="175" text-anchor="middle" class="found">head_-&gt;data == value (2004 == 2004) &#x2192; pop_front() handles it &#x2014; no trailing pointer needed</text>
+  <text x="400" y="195" text-anchor="middle" class="note">O(1) &#x2014; head match is detected before the traversal loop begins</text>
+</svg>

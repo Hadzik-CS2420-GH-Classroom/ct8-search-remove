@@ -135,20 +135,17 @@ bool SinglyLinkedList::contains(int value) const {
     // ! DISCUSSION: One pointer is enough here — we're only reading.
     //   - No trailing pointer needed because we never modify next pointers
 
-    // TODO: Create a 'current' pointer starting at head_
+    auto* current = head_;
 
-    // TODO: While current is not nullptr:
-    //         If current->data equals value, return true.
-    //         Advance current to current->next.
+    while (current) {
+        if (current->data == value) return true;
+        current = current->next;
+    }
 
-    // TODO: Return false — reached nullptr without finding value
-
-    return false; // placeholder — remove this line when done
+    return false;
 }
 
 // --- remove ---
-
-// ? SEE DIAGRAM: images/remove.png — trailing pointer bypass: previous->next skips over the deleted node (middle/tail case)
 
 // ! DISCUSSION: remove() deletes the FIRST node whose data matches value.
 //   - If the value isn't in the list, do nothing (no error)
@@ -162,36 +159,42 @@ bool SinglyLinkedList::contains(int value) const {
 // ! DISCUSSION: The trailing pointer logic here is the same pattern as pop_back.
 //   - Instead of advancing unconditionally to the end, we stop when we FIND a match
 //   - The pointer surgery is the same:
-//     previous->next = current->next   (skip over current)
-//     delete current                   (free the memory)
-//     --size_
+//     1. previous->next = current->next   (skip over current)
+//     2. delete current                   (free the memory)
+//     3. --size_                          (update count)
 
 void SinglyLinkedList::remove(int value) {
     if (!head_) return;
 
+    // ? SEE DIAGRAM: images/remove_head.png — head match: delegate to pop_front() when head_->data == value
+    //
     // ! DISCUSSION: Special case — the head node is the match.
     //   - The trailing pointer pattern requires a 'previous' node, but there
     //     is no node before head_
     //   - Instead, delegate to pop_front()
     if (head_->data == value) {
-        // TODO: Call pop_front() to remove the head node
+        pop_front();
 
         return;
     }
 
+    // ? SEE DIAGRAM: images/remove_middle.png — trailing pointer bypass: previous->next skips over the deleted node
+    //
     // ! DISCUSSION: Set up the trailing pointer pair.
     //   - We already know head_ is not the match
     //   - 'previous' starts at head_, 'current' starts one step ahead at head_->next
 
-    // TODO: Create 'previous' pointing to head_, and 'current' pointing to head_->next
+    auto* previous = head_;
+    auto* current  = head_->next;
 
-    // TODO: While current is not nullptr:
-    //         If current->data == value:
-    //           Set previous->next = current->next   (bypass current)
-    //           Delete current
-    //           Decrement size_
-    //           Return
-    //         Otherwise:
-    //           Advance previous to current
-    //           Advance current to current->next
+    while (current) {
+        if (current->data == value) {
+            previous->next = current->next;
+            delete current;
+            --size_;
+            return;
+        }
+        previous = current;
+        current  = current->next;
+    }
 }

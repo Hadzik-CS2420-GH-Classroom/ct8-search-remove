@@ -1,0 +1,198 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+  <style>
+    text { font-family: 'Segoe UI', Arial, sans-serif; }
+    .title  { font-size: 18px; font-weight: bold; fill: #1a1a1a; }
+    .step-label { font-size: 14px; font-weight: bold; fill: #333; }
+    .value  { font-size: 15px; font-weight: bold; fill: #fff; }
+    .pointer-label { font-size: 12px; font-weight: bold; fill: #8e44ad; }
+    .found  { font-size: 12px; font-weight: bold; fill: #27ae60; }
+    .missed { font-size: 12px; font-weight: bold; fill: #e74c3c; }
+    .code   { font-size: 12px; fill: #2c3e50; font-family: 'Consolas', monospace; }
+    .note   { font-size: 11px; fill: #777; font-style: italic; }
+    .value-sm { font-size: 11px; font-weight: bold; fill: #fff; }
+    .target-label { font-size: 13px; font-family: 'Consolas', monospace; fill: #7d5a00; font-weight: bold; }
+  </style>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e74c3c"/>
+    </marker>
+    <marker id="ptr-arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#8e44ad"/>
+    </marker>
+    <marker id="bypass-arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2980b9"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="20" text-anchor="middle" class="title">remove: Trailing Pointer Pattern</text>
+
+  <!-- Target badge -->
+  <rect x="210" y="28" width="380" height="26" rx="13" fill="#fff8e1" stroke="#f39c12" stroke-width="1.5"/>
+  <text x="400" y="46" text-anchor="middle" class="target-label">removing:  data == 2003  (value = 2003)</text>
+
+  <!-- ==================== Step 1 ==================== -->
+  <text x="20" y="78" class="step-label">Step 1: check head &#x2014; no match, set up trailing pair</text>
+
+  <!-- LEFT: code -->
+  <text x="20" y="122" class="code">head_-&gt;data != value</text>
+  <text x="20" y="137" class="code">previous = head_</text>
+  <text x="20" y="152" class="code">current = head_-&gt;next</text>
+
+  <!-- RIGHT: head_ above first node -->
+  <text x="297" y="102" text-anchor="middle" class="pointer-label">head_</text>
+  <line x1="297" y1="107" x2="297" y2="110" stroke="#8e44ad" stroke-width="2"/>
+  <polygon points="293 110, 297 117, 301 110" fill="#8e44ad"/>
+
+  <!-- Node 2004 -->
+  <rect x="270" y="117" width="55" height="40" rx="4" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+  <rect x="325" y="117" width="38" height="40" rx="4" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
+  <text x="297" y="142" text-anchor="middle" class="value">2004</text>
+  <text x="344" y="142" text-anchor="middle" class="value-sm">next</text>
+  <line x1="363" y1="137" x2="385" y2="137" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Node 2002 -->
+  <rect x="387" y="117" width="55" height="40" rx="4" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+  <rect x="442" y="117" width="38" height="40" rx="4" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
+  <text x="414" y="142" text-anchor="middle" class="value">2002</text>
+  <text x="461" y="142" text-anchor="middle" class="value-sm">next</text>
+  <line x1="480" y1="137" x2="502" y2="137" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Node 2003 -->
+  <rect x="504" y="117" width="55" height="40" rx="4" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+  <rect x="559" y="117" width="38" height="40" rx="4" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
+  <text x="531" y="142" text-anchor="middle" class="value">2003</text>
+  <text x="578" y="142" text-anchor="middle" class="value-sm">next</text>
+  <line x1="597" y1="137" x2="619" y2="137" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Node 2001 -->
+  <rect x="621" y="117" width="55" height="40" rx="4" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+  <rect x="676" y="117" width="38" height="40" rx="4" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
+  <text x="648" y="142" text-anchor="middle" class="value">2001</text>
+  <text x="695" y="142" text-anchor="middle" class="value-sm">next</text>
+  <line x1="714" y1="137" x2="736" y2="137" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- nullptr -->
+  <rect x="738" y="126" width="52" height="22" rx="4" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1.5"/>
+  <text x="764" y="142" text-anchor="middle" class="missed">nullptr</text>
+
+  <!-- previous below 2004 -->
+  <polygon points="293 164, 297 157, 301 164" fill="#8e44ad"/>
+  <line x1="297" y1="168" x2="297" y2="164" stroke="#8e44ad" stroke-width="2"/>
+  <text x="297" y="182" text-anchor="middle" class="pointer-label">previous</text>
+
+  <!-- current below 2002 -->
+  <polygon points="410 164, 414 157, 418 164" fill="#8e44ad"/>
+  <line x1="414" y1="168" x2="414" y2="164" stroke="#8e44ad" stroke-width="2"/>
+  <text x="414" y="182" text-anchor="middle" class="pointer-label">current</text>
+
+  <!-- ==================== Step 2 ==================== -->
+  <text x="20" y="204" class="step-label">Step 2: inspect current &#x2014; not a match, advance both pointers</text>
+
+  <!-- LEFT: code -->
+  <text x="20" y="244" class="code">current-&gt;data != value</text>
+  <text x="20" y="259" class="code">previous = current</text>
+  <text x="20" y="274" class="code">current = current-&gt;next</text>
+
+  <!-- Node 2004 -->
+  <rect x="270" y="239" width="55" height="40" rx="4" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+  <rect x="325" y="239" width="38" height="40" rx="4" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
+  <text x="297" y="264" text-anchor="middle" class="value">2004</text>
+  <text x="344" y="264" text-anchor="middle" class="value-sm">next</text>
+  <line x1="363" y1="259" x2="385" y2="259" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Node 2002 -->
+  <rect x="387" y="239" width="55" height="40" rx="4" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+  <rect x="442" y="239" width="38" height="40" rx="4" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
+  <text x="414" y="264" text-anchor="middle" class="value">2002</text>
+  <text x="461" y="264" text-anchor="middle" class="value-sm">next</text>
+  <line x1="480" y1="259" x2="502" y2="259" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Node 2003 -->
+  <rect x="504" y="239" width="55" height="40" rx="4" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+  <rect x="559" y="239" width="38" height="40" rx="4" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
+  <text x="531" y="264" text-anchor="middle" class="value">2003</text>
+  <text x="578" y="264" text-anchor="middle" class="value-sm">next</text>
+  <line x1="597" y1="259" x2="619" y2="259" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Node 2001 -->
+  <rect x="621" y="239" width="55" height="40" rx="4" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+  <rect x="676" y="239" width="38" height="40" rx="4" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
+  <text x="648" y="264" text-anchor="middle" class="value">2001</text>
+  <text x="695" y="264" text-anchor="middle" class="value-sm">next</text>
+  <line x1="714" y1="259" x2="736" y2="259" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- nullptr -->
+  <rect x="738" y="248" width="52" height="22" rx="4" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1.5"/>
+  <text x="764" y="264" text-anchor="middle" class="missed">nullptr</text>
+
+  <!-- previous below 2002 (advanced) -->
+  <polygon points="410 286, 414 279, 418 286" fill="#8e44ad"/>
+  <line x1="414" y1="290" x2="414" y2="286" stroke="#8e44ad" stroke-width="2"/>
+  <text x="414" y="304" text-anchor="middle" class="pointer-label">previous</text>
+
+  <!-- current below 2003 (advanced) -->
+  <polygon points="527 286, 531 279, 535 286" fill="#8e44ad"/>
+  <line x1="531" y1="290" x2="531" y2="286" stroke="#8e44ad" stroke-width="2"/>
+  <text x="531" y="304" text-anchor="middle" class="pointer-label">current</text>
+
+  <text x="500" y="324" text-anchor="middle" class="note">Both pointers advance together &#x2014; previous always trails one step behind current</text>
+
+  <!-- ==================== OUTCOME — MIDDLE REMOVAL ==================== -->
+  <text x="20" y="349" class="step-label">Step 3: match found &#x2014; bypass &amp; delete</text>
+
+  <!-- LEFT: full if block code -->
+  <text x="20" y="380" class="code">if (current-&gt;data == value) {</text>
+  <text x="20" y="395" class="code">&#xA0;&#xA0;&#xA0;&#xA0;previous-&gt;next = current-&gt;next;</text>
+  <text x="20" y="410" class="code">&#xA0;&#xA0;&#xA0;&#xA0;delete current;</text>
+  <text x="20" y="425" class="code">&#xA0;&#xA0;&#xA0;&#xA0;--size_;</text>
+  <text x="20" y="440" class="code">&#xA0;&#xA0;&#xA0;&#xA0;return;</text>
+  <text x="20" y="455" class="code">}</text>
+
+  <!-- RIGHT: 3 relevant nodes — incoming arrow shows list continues -->
+  <line x1="318" y1="418" x2="338" y2="418" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Node 2002 — previous is here -->
+  <rect x="340" y="398" width="55" height="40" rx="4" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+  <rect x="395" y="398" width="38" height="40" rx="4" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
+  <text x="367" y="423" text-anchor="middle" class="value">2002</text>
+  <text x="414" y="423" text-anchor="middle" class="value-sm">next</text>
+
+  <!-- Node 2003 — DELETED (faded + red X) -->
+  <rect x="475" y="398" width="55" height="40" rx="4" fill="#2ecc71" stroke="#27ae60" stroke-width="2" opacity="0.25"/>
+  <rect x="530" y="398" width="38" height="40" rx="4" fill="#f39c12" stroke="#e67e22" stroke-width="2" opacity="0.25"/>
+  <text x="502" y="423" text-anchor="middle" class="value" opacity="0.25">2003</text>
+  <text x="549" y="423" text-anchor="middle" class="value-sm" opacity="0.25">next</text>
+  <line x1="480" y1="403" x2="563" y2="433" stroke="#e74c3c" stroke-width="2.5" opacity="0.5"/>
+  <line x1="563" y1="403" x2="480" y2="433" stroke="#e74c3c" stroke-width="2.5" opacity="0.5"/>
+
+  <!-- Bypass line: 2002's next → 2001's data -->
+  <line x1="433" y1="418" x2="608" y2="418" stroke="#2980b9" stroke-width="2.5" stroke-dasharray="6,3" marker-end="url(#bypass-arrow)"/>
+
+  <!-- Node 2001 -->
+  <rect x="610" y="398" width="55" height="40" rx="4" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+  <rect x="665" y="398" width="38" height="40" rx="4" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
+  <text x="637" y="423" text-anchor="middle" class="value">2001</text>
+  <text x="684" y="423" text-anchor="middle" class="value-sm">next</text>
+  <line x1="703" y1="418" x2="731" y2="418" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- nullptr -->
+  <rect x="733" y="407" width="52" height="22" rx="4" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1.5"/>
+  <text x="759" y="423" text-anchor="middle" class="missed">nullptr</text>
+
+  <!-- previous below 2002 -->
+  <polygon points="363 445, 367 438, 371 445" fill="#8e44ad"/>
+  <line x1="367" y1="449" x2="367" y2="445" stroke="#8e44ad" stroke-width="2"/>
+  <text x="367" y="463" text-anchor="middle" class="pointer-label">previous</text>
+
+  <!-- current below 2003 (faded) -->
+  <polygon points="498 445, 502 438, 506 445" fill="#8e44ad" opacity="0.35"/>
+  <line x1="502" y1="449" x2="502" y2="445" stroke="#8e44ad" stroke-width="2" opacity="0.35"/>
+  <text x="502" y="463" text-anchor="middle" class="pointer-label" opacity="0.35">current</text>
+
+  <text x="420" y="483" text-anchor="middle" class="found">previous-&gt;next now skips 2003 &#x2192; node deleted, list intact</text>
+
+  <!-- Bottom note -->
+  <text x="400" y="503" text-anchor="middle" class="note">O(n) worst case &#x2014; must traverse to find the node before bypassing it</text>
+</svg>

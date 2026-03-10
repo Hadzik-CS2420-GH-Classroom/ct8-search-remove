@@ -36,7 +36,7 @@ int main() {
     std::cout << "--- Last order cancelled ---\n";
     std::cout << "Order 2005 called in — they got impatient and left the queue.\n";
 
-    // TODO: Call pop_back() to remove the last order
+    orders.pop_back();
 
     std::cout << "Order queue:    ";
     orders.print();
@@ -56,12 +56,8 @@ int main() {
     // --- 3. Checking order status ---
     std::cout << "--- Looking up orders ---\n";
 
-    // TODO: Use contains() to check if order 2003 is still in the queue.
-    //       Print "Order 2003 in queue: true" or "Order 2003 in queue: false".
-    //       (Hint: use std::boolalpha or a ternary to produce "true"/"false")
-
-    // TODO: Use contains() to check if order 9999 is in the queue.
-    //       Print "Order 9999 in queue: true" or "Order 9999 in queue: false".
+    std::cout << "Order 2003 in queue: " << (orders.contains(2003) ? "true" : "false") << "\n";
+    std::cout << "Order 9999 in queue: " << (orders.contains(9999) ? "true" : "false") << "\n";
 
     std::cout << "\n";
 
@@ -82,15 +78,15 @@ int main() {
     // and every case is visible in the output.
 
     std::cout << "remove(2004) — tail:   ";
-    // TODO: Call remove(2004)
+    orders.remove(2004);
     orders.print();
 
     std::cout << "remove(2002) — middle: ";
-    // TODO: Call remove(2002)
+    orders.remove(2002);
     orders.print();
 
     std::cout << "remove(2001) — head:   ";
-    // TODO: Call remove(2001)
+    orders.remove(2001);
     orders.print();
 
     std::cout << "Orders remaining: " << orders.get_size() << "\n";
