@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="'Segoe UI', Arial, sans-serif">
+  <rect width="100%" height="100%" fill="white"/>
+
+  <text x="450" y="28" text-anchor="middle" fill="#1a1a1a" font-size="22" font-weight="bold">remove: Trailing Pointer Pattern</text>
+  <rect x="280" y="38" width="340" height="22" rx="11" fill="#fff3e0" stroke="#e65100" stroke-width="1"/>
+  <text x="450" y="54" text-anchor="middle" fill="#e65100" font-size="12">removing: data == 2003 (value = 2003)</text>
+
+  <!-- STEP 1 -->
+  <rect x="20" y="70" width="860" height="100" rx="8" fill="#fff" stroke="#1565c0" stroke-width="1.5"/>
+  <text x="35" y="92" fill="#1565c0" font-size="14" font-weight="bold">Step 1: Check head &#x2014; no match, set up trailing pair</text>
+
+  <text x="35" y="118" fill="#888" font-size="10">head_</text>
+  <rect x="80" y="108" width="70" height="32" rx="5" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+  <text x="115" y="129" text-anchor="middle" fill="#333" font-size="12" font-weight="bold">2004</text>
+  <line x1="150" y1="124" x2="175" y2="124" stroke="#666" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="175" y="108" width="70" height="32" rx="5" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+  <text x="210" y="129" text-anchor="middle" fill="#333" font-size="12" font-weight="bold">2002</text>
+  <line x1="245" y1="124" x2="270" y2="124" stroke="#666" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="270" y="108" width="70" height="32" rx="5" fill="#fce4ec" stroke="#c62828" stroke-width="2"/>
+  <text x="305" y="129" text-anchor="middle" fill="#c62828" font-size="12" font-weight="bold">2003</text>
+  <line x1="340" y1="124" x2="365" y2="124" stroke="#666" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="365" y="108" width="70" height="32" rx="5" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+  <text x="400" y="129" text-anchor="middle" fill="#333" font-size="12" font-weight="bold">2001</text>
+  <line x1="435" y1="124" x2="460" y2="124" stroke="#666" stroke-width="1.5"/>
+  <text x="465" y="128" fill="#999" font-size="11">nullptr</text>
+
+  <text x="520" y="118" fill="#333" font-size="11">head_-&gt;data &#x2260; value</text>
+  <text x="520" y="136" fill="#333" font-size="11">previous = head_, current = head_-&gt;next</text>
+
+  <!-- STEP 2 -->
+  <rect x="20" y="184" width="860" height="100" rx="8" fill="#fff" stroke="#e65100" stroke-width="1.5"/>
+  <text x="35" y="206" fill="#e65100" font-size="14" font-weight="bold">Step 2: Inspect current &#x2014; not a match, advance both pointers</text>
+
+  <rect x="80" y="220" width="70" height="32" rx="5" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+  <text x="115" y="241" text-anchor="middle" fill="#333" font-size="12" font-weight="bold">2004</text>
+  <line x1="150" y1="236" x2="175" y2="236" stroke="#666" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="175" y="220" width="70" height="32" rx="5" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+  <text x="210" y="241" text-anchor="middle" fill="#333" font-size="12" font-weight="bold">2002</text>
+  <line x1="245" y1="236" x2="270" y2="236" stroke="#666" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="270" y="220" width="70" height="32" rx="5" fill="#fce4ec" stroke="#c62828" stroke-width="2"/>
+  <text x="305" y="241" text-anchor="middle" fill="#c62828" font-size="12" font-weight="bold">2003</text>
+  <line x1="340" y1="236" x2="365" y2="236" stroke="#666" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="365" y="220" width="70" height="32" rx="5" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+  <text x="400" y="241" text-anchor="middle" fill="#333" font-size="12" font-weight="bold">2001</text>
+
+  <text x="183" y="268" text-anchor="middle" fill="#e65100" font-size="10" font-weight="bold">previous</text>
+  <text x="278" y="268" text-anchor="middle" fill="#c62828" font-size="10" font-weight="bold">current</text>
+
+  <text x="520" y="230" fill="#333" font-size="11">current-&gt;data &#x2260; value (2002 &#x2260; 2003)</text>
+  <text x="520" y="248" fill="#333" font-size="11">previous = current</text>
+  <text x="520" y="266" fill="#333" font-size="11">current = current-&gt;next</text>
+
+  <!-- STEP 3 -->
+  <rect x="20" y="298" width="860" height="110" rx="8" fill="#fff" stroke="#27ae60" stroke-width="2"/>
+  <text x="35" y="320" fill="#27ae60" font-size="14" font-weight="bold">Step 3: Match found &#x2014; bypass &#x0026; delete</text>
+
+  <rect x="80" y="336" width="70" height="32" rx="5" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+  <text x="115" y="357" text-anchor="middle" fill="#333" font-size="12" font-weight="bold">2004</text>
+  <line x1="150" y1="352" x2="175" y2="352" stroke="#666" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="175" y="336" width="70" height="32" rx="5" fill="#e8f5e9" stroke="#27ae60" stroke-width="2"/>
+  <text x="210" y="357" text-anchor="middle" fill="#333" font-size="12" font-weight="bold">2002</text>
+
+  <!-- Bypass arrow over 2003 -->
+  <path d="M245,345 Q305,310 365,345" stroke="#27ae60" stroke-width="2" fill="none" marker-end="url(#arrg)"/>
+
+  <rect x="270" y="336" width="70" height="32" rx="5" fill="#fce4ec" stroke="#c62828" stroke-width="2" stroke-dasharray="4,3" opacity="0.5"/>
+  <text x="305" y="357" text-anchor="middle" fill="#c62828" font-size="12" opacity="0.5">2003</text>
+  <text x="305" y="384" text-anchor="middle" fill="#c62828" font-size="10">deleted</text>
+
+  <rect x="365" y="336" width="70" height="32" rx="5" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+  <text x="400" y="357" text-anchor="middle" fill="#333" font-size="12" font-weight="bold">2001</text>
+
+  <text x="183" y="384" text-anchor="middle" fill="#e65100" font-size="10" font-weight="bold">previous</text>
+
+  <text x="520" y="340" fill="#333" font-size="11">current-&gt;data == value (2003 == 2003) &#x2714;</text>
+  <text x="520" y="358" fill="#27ae60" font-size="11" font-weight="bold">previous-&gt;next = current-&gt;next</text>
+  <text x="520" y="376" fill="#333" font-size="11">delete current</text>
+  <text x="520" y="394" fill="#888" font-size="11">previous-&gt;next now skips 2003 &#x2014; node deleted, list intact</text>
+
+  <!-- Key insight -->
+  <rect x="20" y="424" width="860" height="82" rx="10" fill="#f4ecf7" stroke="#6a1b9a" stroke-width="1.5"/>
+  <text x="450" y="448" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold">Key Takeaways</text>
+  <text x="40" y="472" fill="#333" font-size="12">&#x2022; O(n) worst case &#x2014; must traverse to find the node before bypassing it</text>
+  <text x="40" y="492" fill="#333" font-size="12">&#x2022; <tspan font-weight="bold">previous</tspan> always stays one step behind <tspan font-weight="bold">current</tspan> &#x2014; so when we find the match, previous-&gt;next can skip over it</text>
+</svg>

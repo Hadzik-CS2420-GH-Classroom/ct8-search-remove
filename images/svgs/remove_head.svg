@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 280" font-family="'Segoe UI', Arial, sans-serif">
+  <rect width="100%" height="100%" fill="white"/>
+
+  <text x="450" y="28" text-anchor="middle" fill="#1a1a1a" font-size="22" font-weight="bold">remove: Head Match &#x2014; Delegate to pop_front()</text>
+  <rect x="280" y="38" width="340" height="22" rx="11" fill="#fff3e0" stroke="#e65100" stroke-width="1"/>
+  <text x="450" y="54" text-anchor="middle" fill="#e65100" font-size="12">removing: data == 2004 (value = 2004)</text>
+
+  <!-- Step: Check head first -->
+  <text x="30" y="90" fill="#333" font-size="13">Check head first: <tspan font-family="Consolas,monospace" fill="#6a1b9a">if (head_->data == value)</tspan> &#x2014; delegate to pop_front()</text>
+
+  <!-- List with head highlighted -->
+  <text x="30" y="120" fill="#888" font-size="11">head_</text>
+  <line x1="60" y1="122" x2="80" y2="130" stroke="#888" stroke-width="1"/>
+
+  <!-- Node 2004 (head - being removed) -->
+  <rect x="80" y="118" width="80" height="36" rx="5" fill="#f9a825" stroke="#f57f17" stroke-width="2"/>
+  <text x="100" y="140" fill="#333" font-size="13" font-weight="bold">2004</text>
+  <rect x="132" y="122" width="28" height="14" rx="3" fill="#fff8e1"/>
+  <text x="146" y="133" text-anchor="middle" fill="#f57f17" font-size="9">next</text>
+  <line x1="160" y1="136" x2="190" y2="136" stroke="#666" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Node 2002 -->
+  <rect x="190" y="118" width="80" height="36" rx="5" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+  <text x="210" y="140" fill="#333" font-size="13" font-weight="bold">2002</text>
+  <line x1="270" y1="136" x2="300" y2="136" stroke="#666" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Node 2003 -->
+  <rect x="300" y="118" width="80" height="36" rx="5" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+  <text x="320" y="140" fill="#333" font-size="13" font-weight="bold">2003</text>
+  <line x1="380" y1="136" x2="410" y2="136" stroke="#666" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Node 2001 -->
+  <rect x="410" y="118" width="80" height="36" rx="5" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+  <text x="430" y="140" fill="#333" font-size="13" font-weight="bold">2001</text>
+  <line x1="490" y1="136" x2="520" y2="136" stroke="#666" stroke-width="1.5"/>
+
+  <!-- nullptr -->
+  <text x="525" y="140" fill="#999" font-size="12">nullptr</text>
+
+  <!-- Code block -->
+  <rect x="30" y="170" width="360" height="60" rx="6" fill="#1e1e2e"/>
+  <text x="45" y="192" fill="#cba6f7" font-size="11">if</text><text x="58" y="192" fill="#cdd6f4" font-size="11"> (head_-&gt;data == value) {</text>
+  <text x="60" y="210" fill="#89dceb" font-size="11">pop_front</text><text x="115" y="210" fill="#cdd6f4" font-size="11">();</text>
+  <text x="60" y="224" fill="#cba6f7" font-size="11">return</text><text x="96" y="224" fill="#cdd6f4" font-size="11">;</text>
+
+  <!-- Explanation -->
+  <text x="420" y="190" fill="#333" font-size="12">head_-&gt;data == value (2004 == 2004)</text>
+  <text x="420" y="210" fill="#27ae60" font-size="12" font-weight="bold">&#x2192; pop_front() handles it &#x2014; no trailing pointer needed</text>
+  <text x="420" y="236" fill="#888" font-size="11">O(1) &#x2014; head match is detected before the traversal loop begins</text>
+
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#666"/>
+    </marker>
+  </defs>
+</svg>
